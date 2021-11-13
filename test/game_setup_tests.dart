@@ -38,7 +38,7 @@ void main() {
   });
 }
 
-extension CheckingIfSorted on List<int> {
+extension IsSorted on List<int> {
   bool isSorted() {
     int previous = 0;
     for (var value in this) {

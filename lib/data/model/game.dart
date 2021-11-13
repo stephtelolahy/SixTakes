@@ -2,7 +2,7 @@ class Game {
   int phase;
   final List<GameRow> board;
   final List<Player> players;
-  String? winner;
+  List<String>? winner;
 
   Game({
     required this.phase,

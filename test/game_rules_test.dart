@@ -1,14 +1,9 @@
 import 'package:sixtakes/data/engine/game_rules.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sixtakes/data/model/game.dart';
 
 void main() {
   final sut = GameRules();
-
-  test('get winner', () {
-    // Given
-    // When
-    // Assert
-  });
 
   test('get bulls for card', () {
     // Given
@@ -55,5 +50,50 @@ void main() {
     expect(sut.bullsForCard(1), equals(1));
     expect(sut.bullsForCard(104), equals(1));
     expect(sut.bullsForCard(57), equals(1));
+  });
+
+  test('no winner if any player still have card', () {
+    // Given
+    final game = Game(phase: 0, board: [], players: [
+      Player(id: 'p1', name: '', photoURL: '', hand: [], played: 34, bulls: 10),
+      Player(id: 'p2', name: '', photoURL: '', hand: [], bulls: 20),
+      Player(id: 'p3', name: '', photoURL: '', hand: [], bulls: 30),
+    ]);
+
+    // When
+    final winners = sut.isGameOver(game);
+
+    // Assert
+    expect(winners, isNull);
+  });
+
+  test('single winner', () {
+    // Given
+    final game = Game(phase: 0, board: [], players: [
+      Player(id: 'p1', name: '', photoURL: '', hand: [], bulls: 10),
+      Player(id: 'p2', name: '', photoURL: '', hand: [], bulls: 20),
+      Player(id: 'p3', name: '', photoURL: '', hand: [], bulls: 30),
+    ]);
+
+    // When
+    final winners = sut.isGameOver(game);
+
+    // Assert
+    expect(winners, equals(['p1']));
+  });
+
+  test('multiple winners', () {
+    // Given
+    final game = Game(phase: 0, board: [], players: [
+      Player(id: 'p1', name: '', photoURL: '', hand: [], bulls: 10),
+      Player(id: 'p2', name: '', photoURL: '', hand: [], bulls: 10),
+      Player(id: 'p3', name: '', photoURL: '', hand: [], bulls: 30),
+    ]);
+
+    // When
+    final winners = sut.isGameOver(game);
+
+    // Assert
+    expect(winners, equals(['p1', 'p2']));
   });
 }
