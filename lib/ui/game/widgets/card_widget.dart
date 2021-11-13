@@ -25,7 +25,11 @@ class CardWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(4.0),
             ),
             color: Colors.blue,
-            child: Center(child: Text('${data.value}')),
+            child: Center(
+              child: Column(
+                children: [Text('${data.value}'), const Icon(Icons.smart_toy)],
+              ),
+            ),
           ),
         ));
   }

@@ -54,14 +54,14 @@ void main() {
 
   test('no winner if any player still have card', () {
     // Given
-    final game = Game(phase: 0, board: [], players: [
+    final state = Game(phase: 0, board: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [], played: 34, bulls: 10),
       Player(id: 'p2', name: '', photoURL: '', hand: [], bulls: 20),
       Player(id: 'p3', name: '', photoURL: '', hand: [], bulls: 30),
     ]);
 
     // When
-    final winners = sut.isGameOver(game);
+    final winners = sut.winners(state);
 
     // Assert
     expect(winners, isNull);
@@ -69,14 +69,14 @@ void main() {
 
   test('single winner', () {
     // Given
-    final game = Game(phase: 0, board: [], players: [
+    final state = Game(phase: 0, board: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [], bulls: 10),
       Player(id: 'p2', name: '', photoURL: '', hand: [], bulls: 20),
       Player(id: 'p3', name: '', photoURL: '', hand: [], bulls: 30),
     ]);
 
     // When
-    final winners = sut.isGameOver(game);
+    final winners = sut.winners(state);
 
     // Assert
     expect(winners, equals(['p1']));
@@ -84,14 +84,14 @@ void main() {
 
   test('multiple winners', () {
     // Given
-    final game = Game(phase: 0, board: [], players: [
+    final state = Game(phase: 0, board: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [], bulls: 10),
       Player(id: 'p2', name: '', photoURL: '', hand: [], bulls: 10),
       Player(id: 'p3', name: '', photoURL: '', hand: [], bulls: 30),
     ]);
 
     // When
-    final winners = sut.isGameOver(game);
+    final winners = sut.winners(state);
 
     // Assert
     expect(winners, equals(['p1', 'p2']));

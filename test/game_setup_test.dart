@@ -11,30 +11,30 @@ void main() {
     final user2 = User('2', 'name2', 'photo2', 0);
 
     // When
-    final game = sut.createGame([user1, user2]);
+    final state = sut.createGame([user1, user2]);
 
     // Assert
-    expect(game.players.length, equals(2));
-    expect(game.players[0].id, equals('1'));
-    expect(game.players[0].name, equals('name1'));
-    expect(game.players[0].photoURL, equals('photo1'));
-    expect(game.players[1].id, equals('2'));
-    expect(game.players[1].name, equals('name2'));
-    expect(game.players[1].photoURL, equals('photo2'));
-    for (var player in game.players) {
+    expect(state.players.length, equals(2));
+    expect(state.players[0].id, equals('1'));
+    expect(state.players[0].name, equals('name1'));
+    expect(state.players[0].photoURL, equals('photo1'));
+    expect(state.players[1].id, equals('2'));
+    expect(state.players[1].name, equals('name2'));
+    expect(state.players[1].photoURL, equals('photo2'));
+    for (var player in state.players) {
       expect(player.played, isNull);
       expect(player.bulls, equals(0));
       expect(player.hand.length, equals(10), reason: 'each player should have 10 cards');
       expect(player.hand.isSorted(), isTrue, reason: 'hand must be sorted');
     }
 
-    expect(game.board.length, equals(4));
-    for (var row in game.board) {
+    expect(state.board.length, equals(4));
+    for (var row in state.board) {
       expect(row.cards.length, equals(1), reason: 'each row must contain one card');
     }
 
-    expect(game.phase, equals(0));
-    expect(game.winner, isNull);
+    expect(state.phase, equals(0));
+    expect(state.winner, isNull);
   });
 }
 
