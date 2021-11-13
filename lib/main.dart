@@ -11,9 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: _title,
-      home: GameView(),
+      theme: ThemeData(brightness: Brightness.dark),
+      home: const GameView(),
     );
   }
 }

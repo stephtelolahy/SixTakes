@@ -13,11 +13,9 @@ class GameView extends StatelessWidget {
       create: (context) => GameModel()..init(),
       builder: (context, _) => Scaffold(
         appBar: AppBar(title: const Text('Card game')),
-        floatingActionButton: IconButton(
+        floatingActionButton: FloatingActionButton(
           onPressed: () => context.read<GameModel>().update(),
-          icon: const Icon(
-            Icons.animation,
-          ),
+          child: const Icon(Icons.animation),
         ),
         body: const GameBoard(),
       ),
@@ -32,7 +30,6 @@ class GameBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<GameModel>(builder: (context, model, child) {
       return Container(
-        color: Colors.amber,
         constraints: const BoxConstraints.expand(),
         child: Stack(
           children: model.cards.map((e) => CardWidget(data: e)).toList(),
