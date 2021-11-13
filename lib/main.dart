@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sixtakes/game_view.dart';
+
+import 'ui/game/game_view.dart';
 
 void main() => runApp(const MyApp());
 

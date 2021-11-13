@@ -1,19 +1,33 @@
 import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
-import 'package:sixtakes/card_model.dart';
+
+class CardData {
+  final int value;
+  final int bulls;
+  bool covered;
+  bool hidden;
+  Rect position;
+
+  CardData({
+    required this.value,
+    required this.bulls,
+    this.covered = false,
+    this.hidden = false,
+    required this.position,
+  });
+}
 
 class GameModel extends ChangeNotifier {
-  final List<CardModel> _cards = [];
+  final List<CardData> _cards = [];
 
-  List<CardModel> get cards => _cards;
+  List<CardData> get cards => _cards;
 
   void init() {
     _cards.addAll(
       List.generate(
         3,
-        (idx) => CardModel(
-          id: "card$idx",
+        (idx) => CardData(
           value: idx + 1,
           bulls: 1,
           position: const Rect.fromLTWH(100, 100, 50, 80),

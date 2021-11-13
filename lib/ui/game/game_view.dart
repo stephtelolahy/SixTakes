@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sixtakes/card_widget.dart';
 
+import 'widgets/card_widget.dart';
 import 'game_model.dart';
 
 class GameView extends StatelessWidget {
@@ -35,7 +35,7 @@ class GameBoard extends StatelessWidget {
         color: Colors.amber,
         constraints: const BoxConstraints.expand(),
         child: Stack(
-          children: model.cards.map((e) => CardWidget(model: e)).toList(),
+          children: model.cards.map((e) => CardWidget(data: e)).toList(),
         ),
       );
     });
