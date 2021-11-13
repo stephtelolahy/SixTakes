@@ -17,14 +17,14 @@ class CardWidget extends StatelessWidget {
         duration: const Duration(milliseconds: 500),
         curve: Curves.fastOutSlowIn,
         child: Opacity(
-          opacity: model.opacity,
+          opacity: model.hidden ? 0 : 1,
           child: Card(
             elevation: 1.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4.0),
             ),
             color: Colors.blue,
-            child: Center(child: Text(model.id)),
+            child: Center(child: Text('${model.value}')),
           ),
         ));
   }

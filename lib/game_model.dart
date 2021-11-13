@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 import 'package:sixtakes/card_model.dart';
@@ -14,15 +14,16 @@ class GameModel extends ChangeNotifier {
         3,
         (idx) => CardModel(
           id: "card$idx",
-          position: const Rectangle(100, 100, 50, 80),
+          value: idx + 1,
+          bulls: 1,
+          position: const Rect.fromLTWH(100, 100, 50, 80),
         ),
       ),
     );
   }
 
   void update() {
-    _cards[0].position = const Rectangle(100, 100, 100, 20);
-    _cards[0].opacity = 1.0;
+    _cards[0].position = _cards[0].position.translate(50, 0);
     notifyListeners();
   }
 }

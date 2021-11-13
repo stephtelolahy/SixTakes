@@ -1,9 +1,19 @@
-import 'dart:math';
+import 'dart:ui';
 
 class CardModel {
   final String id;
-  Rectangle<double> position;
-  double opacity;
+  final int value;
+  final int bulls;
+  bool covered;
+  bool hidden;
+  Rect position;
 
-  CardModel({required this.id, required this.position, this.opacity = 0.0});
+  CardModel({
+    required this.id,
+    required this.value,
+    required this.bulls,
+    this.covered = false,
+    this.hidden = false,
+    required this.position,
+  });
 }
