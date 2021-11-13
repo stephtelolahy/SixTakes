@@ -1,15 +1,17 @@
-# sixtakes
+# SixTakes
 
-A new Flutter project.
+6 takes! - Wolfgang Kramer's ingeniously simple card game with "bullheads" - Developed in Flutter
 
-## Getting Started
+The aim of the game is avoid getting any cards. Each card you have to pick up will cost you minus points per bullhead on it. The player with the fewest bullheads at the end of the game is the winner.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- 6 takes! single player mode
+- Multiplayer mode
+- Leaderboard
+- Available languages: English
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Getting started
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
