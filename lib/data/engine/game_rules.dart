@@ -6,7 +6,7 @@ import 'package:sixtakes/data/model/game.dart';
 abstract class IGameRules {
   int bullsForCard(int value);
   List<String>? winners(Game state);
-  List<GameEvent> effectsOn(GameEvent event, Game state);
+  List<GameEvent> triggered(Game state);
 }
 
 class GameRules extends IGameRules {
@@ -40,7 +40,11 @@ class GameRules extends IGameRules {
   }
 
   @override
-  List<GameEvent> effectsOn(GameEvent event, Game state) {
+  List<GameEvent> triggered(Game state) {
+    if (state.phase == 0 && state.players.every((e) => e.played != null)) {
+      return [GameEventUncoverCards()];
+    }
+
     return [];
   }
 }

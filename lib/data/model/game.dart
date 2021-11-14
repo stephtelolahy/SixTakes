@@ -15,7 +15,7 @@ class Game {
 class GameRow {
   final List<int> cards;
 
-  GameRow({required this.cards});
+  const GameRow({required this.cards});
 }
 
 class Player {
@@ -23,6 +23,7 @@ class Player {
   final String name;
   final String photoURL;
   final List<int> hand;
+  final List<int> gathered;
   int bulls;
   int? played;
 
@@ -31,6 +32,7 @@ class Player {
     required this.name,
     required this.photoURL,
     required this.hand,
+    required this.gathered,
     required this.bulls,
     this.played,
   });

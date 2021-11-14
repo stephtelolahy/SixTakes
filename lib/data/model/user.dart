@@ -4,7 +4,12 @@ class User {
   final String photoURL;
   final int score;
 
-  User(this.id, this.name, this.photoURL, this.score);
+  const User({
+    required this.id,
+    required this.name,
+    required this.photoURL,
+    required this.score,
+  });
 
   User.fromJson(Map<String, Object?> json)
       : id = json['id'] as String,

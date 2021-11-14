@@ -7,8 +7,8 @@ void main() {
 
   test('setup game with 2 players', () {
     // Given
-    final user1 = User('1', 'name1', 'photo1', 0);
-    final user2 = User('2', 'name2', 'photo2', 0);
+    const user1 = User(id: '1', name: 'name1', photoURL: 'photo1', score: 0);
+    const user2 = User(id: '2', name: 'name2', photoURL: 'photo2', score: 0);
 
     // When
     final state = sut.createGame([user1, user2]);

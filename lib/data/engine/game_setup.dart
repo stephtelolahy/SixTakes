@@ -18,6 +18,7 @@ class GameSetup extends IGameSetup {
         name: e.name,
         photoURL: e.photoURL,
         hand: hand,
+        gathered: [],
         bulls: 0,
       );
     }).toList();
