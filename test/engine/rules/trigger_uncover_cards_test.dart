@@ -8,7 +8,7 @@ void main() {
 
   test('uncover cards if all players selected a card', () {
     // Given
-    final state = Game(phase: 0, board: [], players: [
+    final state = Game(select: true, board: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 0, played: 45),
       Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 0, played: 11)
     ]);
@@ -22,7 +22,7 @@ void main() {
 
   test('do nothing if not all players selected a card', () {
     // Given
-    final state = Game(phase: 0, board: [], players: [
+    final state = Game(select: true, board: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 0),
       Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 11)
     ]);

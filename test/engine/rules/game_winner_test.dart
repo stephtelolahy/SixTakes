@@ -7,7 +7,7 @@ void main() {
 
   test('no winner if any player still have card', () {
     // Given
-    final state = Game(phase: 0, board: [], players: [
+    final state = Game(select: false, board: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], played: 34, bulls: 10),
       Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 20),
       Player(id: 'p3', name: '', photoURL: '', hand: [], gathered: [], bulls: 30),
@@ -22,7 +22,7 @@ void main() {
 
   test('single winner', () {
     // Given
-    final state = Game(phase: 0, board: [], players: [
+    final state = Game(select: false, board: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
       Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 20),
       Player(id: 'p3', name: '', photoURL: '', hand: [], gathered: [], bulls: 30),
@@ -37,7 +37,7 @@ void main() {
 
   test('multiple winners', () {
     // Given
-    final state = Game(phase: 0, board: [], players: [
+    final state = Game(select: false, board: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
       Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
       Player(id: 'p3', name: '', photoURL: '', hand: [], gathered: [], bulls: 30),

@@ -23,6 +23,6 @@ class GameSetup extends IGameSetup {
       );
     }).toList();
     final board = List.generate(4, (idx) => GameRow(cards: [deck.removeAt(0)]));
-    return Game(phase: 0, board: board, players: players);
+    return Game(select: true, board: board, players: players);
   }
 }

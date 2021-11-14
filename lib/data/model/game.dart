@@ -1,11 +1,11 @@
 class Game {
-  int phase;
+  bool select;
   final List<GameRow> board;
   final List<Player> players;
   List<String>? winner;
 
   Game({
-    required this.phase,
+    required this.select,
     required this.board,
     required this.players,
     this.winner,

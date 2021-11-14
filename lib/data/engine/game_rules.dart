@@ -41,7 +41,7 @@ class GameRules extends IGameRules {
 
   @override
   List<GameEvent> triggered(Game state) {
-    if (state.phase == 0 && state.players.every((e) => e.played != null)) {
+    if (state.select && state.players.every((e) => e.played != null)) {
       return [GameEventUncoverCards()];
     }
 

@@ -6,5 +6,7 @@ class GameEventUncoverCards extends GameEvent {
   List<Object?> get props => [];
 
   @override
-  dispatch(Game state) {}
+  dispatch(Game state) {
+    state.select = false;
+  }
 }

@@ -14,5 +14,9 @@ class GameEventSelectCard extends GameEvent {
   List<Object?> get props => [player, card];
 
   @override
-  dispatch(Game state) {}
+  dispatch(Game state) {
+    final you = state.players.firstWhere((e) => e.id == player);
+    you.hand.remove(card);
+    you.played = card;
+  }
 }

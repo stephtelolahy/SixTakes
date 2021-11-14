@@ -33,7 +33,7 @@ void main() {
       expect(row.cards.length, equals(1), reason: 'each row must contain one card');
     }
 
-    expect(state.phase, equals(0));
+    expect(state.select, isTrue);
     expect(state.winner, isNull);
   });
 }
