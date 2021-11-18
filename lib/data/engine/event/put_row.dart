@@ -16,5 +16,9 @@ class GameEventPutRow extends GameEvent {
   List<Object?> get props => [player, card, row];
 
   @override
-  dispatch(Game state) {}
+  dispatch(Game state) {
+    final actor = state.players.firstWhere((e) => e.id == 'p1');
+    actor.played = null;
+    state.rows[row].cards.add(card);
+  }
 }

@@ -15,8 +15,8 @@ void main() {
     event.dispatch(state);
 
     // Assert
-    final you = state.players.firstWhere((e) => e.id == 'p1');
-    expect(you.played, equals(2));
-    expect(you.hand, equals([1, 3]));
+    final actor = state.players.firstWhere((e) => e.id == 'p1');
+    expect(actor.played, equals(2));
+    expect(actor.hand, equals([1, 3]));
   });
 }

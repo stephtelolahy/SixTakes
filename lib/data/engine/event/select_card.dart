@@ -15,8 +15,8 @@ class GameEventSelectCard extends GameEvent {
 
   @override
   dispatch(Game state) {
-    final you = state.players.firstWhere((e) => e.id == player);
-    you.hand.remove(card);
-    you.played = card;
+    final actor = state.players.firstWhere((e) => e.id == player);
+    actor.hand.remove(card);
+    actor.played = card;
   }
 }

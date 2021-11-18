@@ -13,9 +13,9 @@ class Game {
 }
 
 class GameRow {
-  final List<int> cards;
+  List<int> cards;
 
-  const GameRow({required this.cards});
+  GameRow({required this.cards});
 }
 
 class Player {
