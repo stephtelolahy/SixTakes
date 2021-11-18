@@ -1,10 +1,12 @@
 part of 'event.dart';
 
-/// each player must select a new card to play
+/// mark each player must select a card
 class GameEventNextTurn extends GameEvent {
   @override
   List<Object?> get props => [];
 
   @override
-  dispatch(Game state) {}
+  dispatch(Game state) {
+    state.select = true;
+  }
 }

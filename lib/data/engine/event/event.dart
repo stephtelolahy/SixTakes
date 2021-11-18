@@ -7,6 +7,7 @@ part 'put_row.dart';
 part 'take_row.dart';
 part 'next_turn.dart';
 
+// state update
 abstract class GameEvent extends Equatable {
   dispatch(Game state);
 }
