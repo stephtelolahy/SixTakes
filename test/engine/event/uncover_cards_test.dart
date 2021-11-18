@@ -5,7 +5,7 @@ import 'package:sixtakes/data/model/game.dart';
 void main() {
   test('uncover cards', () {
     // Given
-    final state = Game(select: true, board: [], players: []);
+    final state = Game(select: true, rows: [], players: []);
     final event = GameEventUncoverCards();
 
     // When

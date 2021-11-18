@@ -28,8 +28,8 @@ void main() {
       expect(player.hand.isSorted(), isTrue, reason: 'hand must be sorted');
     }
 
-    expect(state.board.length, equals(4));
-    for (var row in state.board) {
+    expect(state.rows.length, equals(4));
+    for (var row in state.rows) {
       expect(row.cards.length, equals(1), reason: 'each row must contain one card');
     }
 

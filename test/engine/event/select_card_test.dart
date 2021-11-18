@@ -5,7 +5,7 @@ import 'package:sixtakes/data/model/game.dart';
 void main() {
   test('select a card', () {
     // Given
-    final state = Game(select: true, board: [], players: [
+    final state = Game(select: true, rows: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [1, 2, 3], gathered: [], bulls: 0),
       Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 0, played: 11)
     ]);

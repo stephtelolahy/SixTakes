@@ -1,12 +1,12 @@
 class Game {
   bool select;
-  final List<GameRow> board;
+  final List<GameRow> rows;
   final List<Player> players;
   List<String>? winner;
 
   Game({
     required this.select,
-    required this.board,
+    required this.rows,
     required this.players,
     this.winner,
   });
