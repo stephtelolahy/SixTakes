@@ -1,21 +1,15 @@
 class Game {
-  bool select;
-  final List<GameRow> rows;
   final List<Player> players;
+  final List<GameRow> rows;
+  bool select;
   List<String>? winner;
 
   Game({
-    required this.select,
-    required this.rows,
     required this.players,
+    required this.rows,
+    required this.select,
     this.winner,
   });
-}
-
-class GameRow {
-  List<int> cards;
-
-  GameRow({required this.cards});
 }
 
 class Player {
@@ -24,8 +18,8 @@ class Player {
   final String photoURL;
   final List<int> hand;
   final List<int> gathered;
-  int bulls;
   int? played;
+  int bulls;
 
   Player({
     required this.id,
@@ -36,4 +30,10 @@ class Player {
     required this.bulls,
     this.played,
   });
+}
+
+class GameRow {
+  List<int> cards;
+
+  GameRow({required this.cards});
 }

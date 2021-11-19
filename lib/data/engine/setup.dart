@@ -1,14 +1,15 @@
+import 'package:sixtakes/data/model/card.dart';
 import 'package:sixtakes/data/model/game.dart';
 import 'package:sixtakes/data/model/user.dart';
 
 abstract class IGameSetup {
-  Game createGame(List<User> users);
+  Game createGame(List<User> users, List<PlayingCard> cards);
 }
 
 class GameSetup extends IGameSetup {
   @override
-  Game createGame(List<User> users) {
-    var deck = List.generate(104, (idx) => idx + 1);
+  Game createGame(List<User> users, List<PlayingCard> cards) {
+    final deck = cards.map((e) => e.value).toList();
     deck.shuffle();
     final players = users.map((e) {
       var hand = List.generate(10, (idx) => deck.removeAt(0));

@@ -3,7 +3,7 @@ import 'package:sixtakes/data/engine/event/event.dart';
 import 'package:sixtakes/data/model/game.dart';
 
 void main() {
-  test('uncover cards', () {
+  test('set select flag to false if uncover cards', () {
     // Given
     final state = Game(select: true, rows: [], players: []);
     final event = GameEventUncoverCards();
@@ -12,6 +12,6 @@ void main() {
     event.dispatch(state);
 
     // Assert
-    expect(state.select, equals(false));
+    expect(state.select, isFalse);
   });
 }

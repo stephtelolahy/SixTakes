@@ -4,30 +4,10 @@ import 'package:sixtakes/data/engine/event/event.dart';
 import 'package:sixtakes/data/model/game.dart';
 
 abstract class IGameRules {
-  int bullsForCard(int value);
   List<GameEvent> triggered(Game state);
 }
 
 class GameRules extends IGameRules {
-  @override
-  int bullsForCard(int value) {
-    if (value % 11 == 0) {
-      if (value == 55) {
-        return 7;
-      }
-      return 5;
-    }
-
-    if (value % 5 == 0) {
-      if (value % 10 == 0) {
-        return 3;
-      }
-      return 2;
-    }
-
-    return 1;
-  }
-
   @override
   List<GameEvent> triggered(Game state) {
     final winner = _winners(state);

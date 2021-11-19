@@ -6,7 +6,7 @@ import 'package:sixtakes/data/model/game.dart';
 void main() {
   final sut = GameRules();
 
-  test('single winner', () {
+  test('single winner if one player has the biggest number of bulls', () {
     // Given
     final state = Game(select: false, rows: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
@@ -25,7 +25,7 @@ void main() {
         ]));
   });
 
-  test('multiple winners', () {
+  test('multiple winners if multiple players have the biggest number of bulls', () {
     // Given
     final state = Game(select: false, rows: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),

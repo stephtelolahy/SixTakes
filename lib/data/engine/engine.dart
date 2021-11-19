@@ -4,7 +4,6 @@ import 'package:sixtakes/data/model/game.dart';
 
 abstract class IGameEngine {
   Stream<Game> get state;
-
   play(String player, int card);
 }
 

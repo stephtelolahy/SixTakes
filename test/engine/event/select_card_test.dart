@@ -3,7 +3,7 @@ import 'package:sixtakes/data/engine/event/event.dart';
 import 'package:sixtakes/data/model/game.dart';
 
 void main() {
-  test('select a card', () {
+  test('put the card face down on the table if dispatching select a card', () {
     // Given
     final state = Game(select: true, rows: [], players: [
       Player(id: 'p1', name: '', photoURL: '', hand: [1, 2, 3], gathered: [], bulls: 0),

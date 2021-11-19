@@ -1,3 +1,4 @@
+import 'package:sixtakes/data/engine/deck.dart';
 import 'package:sixtakes/data/engine/setup.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sixtakes/data/model/user.dart';
@@ -9,9 +10,10 @@ void main() {
     // Given
     const user1 = User(id: '1', name: 'name1', photoURL: 'photo1', score: 0);
     const user2 = User(id: '2', name: 'name2', photoURL: 'photo2', score: 0);
+    final deck = GameDeck().createDeck();
 
     // When
-    final state = sut.createGame([user1, user2]);
+    final state = sut.createGame([user1, user2], deck);
 
     // Assert
     expect(state.players.length, equals(2));

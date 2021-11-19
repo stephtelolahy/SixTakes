@@ -23,8 +23,8 @@ void main() {
   test('do nothing if not all players selected a card', () {
     // Given
     final state = Game(select: true, rows: [], players: [
-      Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 0),
-      Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 11)
+      Player(id: 'p1', name: '', photoURL: '', hand: [24, 39], gathered: [], bulls: 0),
+      Player(id: 'p2', name: '', photoURL: '', hand: [32, 54], gathered: [], bulls: 11)
     ]);
 
     // When
