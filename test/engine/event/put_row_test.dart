@@ -18,7 +18,6 @@ void main() {
 
     // Assert
     final actor = state.players.firstWhere((e) => e.id == 'p1');
-
     expect(actor.played, isNull);
     expect(state.rows[0].cards, equals([43, 49, 55]));
     expect(state.rows[1].cards, equals([99, 104]));

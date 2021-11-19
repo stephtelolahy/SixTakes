@@ -1,6 +1,6 @@
 part of 'event.dart';
 
-/// gather the 5 cards on a row
+/// gather all cards on a row
 class GameEventTakeRow extends GameEvent {
   final String player;
   final int row;
@@ -14,5 +14,10 @@ class GameEventTakeRow extends GameEvent {
   List<Object?> get props => [player, row];
 
   @override
-  dispatch(Game state) {}
+  dispatch(Game state) {
+    final actor = state.players.firstWhere((e) => e.id == player);
+    final rowObject = state.rows[row];
+    actor.gathered.addAll(rowObject.cards);
+    rowObject.cards.clear();
+  }
 }

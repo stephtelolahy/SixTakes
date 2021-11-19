@@ -18,7 +18,8 @@ class GameEventPutRow extends GameEvent {
   @override
   dispatch(Game state) {
     final actor = state.players.firstWhere((e) => e.id == 'p1');
+    final rowObject = state.rows[row];
     actor.played = null;
-    state.rows[row].cards.add(card);
+    rowObject.cards.add(card);
   }
 }
