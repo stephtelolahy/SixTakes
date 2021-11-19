@@ -43,8 +43,4 @@ void main() {
     // Assert
     expect(effects, equals([GameEventPutRow(player: 'p2', row: 3)]));
   });
-
-  test('gather row cards when no corresponding row', () {});
-
-  test('gather row cards when putting sixth card', () {});
 }

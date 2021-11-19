@@ -42,9 +42,33 @@ class GameRules extends IGameRules {
   }
 
   List<GameEvent> _putSelectedCard(Game state, Player actor, int card) {
-    final nearestValue =
-        state.rows.map((e) => e.cards.last.value).where((e) => e < card).reduce(max);
-    final rowIndex = state.rows.indexWhere((e) => e.cards.last.value == nearestValue);
+    final possibleRows = state.rows.where((e) => e.lastValue < card);
+
+    if (possibleRows.isEmpty) {
+      final minRowBulls = state.rows.map((e) => e.bulls).reduce(min);
+      final minRowIndex = state.rows.indexWhere((e) => e.bulls == minRowBulls);
+      return [
+        GameEventTakeRow(player: actor.id, row: minRowIndex),
+        GameEventPutRow(player: actor.id, row: minRowIndex),
+      ];
+    }
+
+    final nearestValue = possibleRows.map((e) => e.lastValue).reduce(max);
+    final rowIndex = state.rows.indexWhere((e) => e.lastValue == nearestValue);
+
+    if (state.rows[rowIndex].cards.length >= 5) {
+      return [
+        GameEventTakeRow(player: actor.id, row: rowIndex),
+        GameEventPutRow(player: actor.id, row: rowIndex),
+      ];
+    }
+
     return [GameEventPutRow(player: actor.id, row: rowIndex)];
   }
+}
+
+extension Bulls on GameRow {
+  int get bulls => cards.map((e) => e.bulls).reduce((a, b) => a + b);
+
+  int get lastValue => cards.last.value;
 }
