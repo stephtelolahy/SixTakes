@@ -24,8 +24,8 @@ class GameRules extends IGameRules {
     }
 
     if (!state.select) {
-      final minPlayedCard = state.players.map((e) => e.played!.value).reduce(min);
-      final minPlayer = state.players.firstWhere((e) => e.played!.value == minPlayedCard);
+      final minPlayedCard = state.players.map((e) => e.played?.value).whereType<int>().reduce(min);
+      final minPlayer = state.players.firstWhere((e) => e.played?.value == minPlayedCard);
       return _putSelectedCard(state, minPlayer, minPlayedCard);
     }
 

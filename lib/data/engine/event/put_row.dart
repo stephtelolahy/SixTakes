@@ -15,7 +15,7 @@ class GameEventPutRow extends GameEvent {
 
   @override
   dispatch(Game state) {
-    final actor = state.players.firstWhere((e) => e.id == 'p1');
+    final actor = state.players.firstWhere((e) => e.id == player);
     final cardObject = actor.played;
     if (cardObject == null) {
       throw Exception('Missing played card');
