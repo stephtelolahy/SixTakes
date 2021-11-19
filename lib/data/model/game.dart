@@ -1,3 +1,5 @@
+import 'package:sixtakes/data/model/card.dart';
+
 class Game {
   final List<Player> players;
   final List<GameRow> rows;
@@ -16,10 +18,10 @@ class Player {
   final String id;
   final String name;
   final String photoURL;
-  final List<int> hand;
-  final List<int> gathered;
-  int? played;
+  final List<PlayingCard> hand;
+  final List<PlayingCard> gathered;
   int bulls;
+  PlayingCard? played;
 
   Player({
     required this.id,
@@ -33,7 +35,7 @@ class Player {
 }
 
 class GameRow {
-  List<int> cards;
+  List<PlayingCard> cards;
 
   GameRow({required this.cards});
 }

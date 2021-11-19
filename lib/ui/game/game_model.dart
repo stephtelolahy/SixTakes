@@ -2,14 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 
-class CardData {
+class DisplayableCard {
   final int value;
   final int bulls;
   bool covered;
   bool hidden;
   Rect position;
 
-  CardData({
+  DisplayableCard({
     required this.value,
     required this.bulls,
     this.covered = false,
@@ -19,15 +19,15 @@ class CardData {
 }
 
 class GameModel extends ChangeNotifier {
-  final List<CardData> _cards = [];
+  final List<DisplayableCard> _cards = [];
 
-  List<CardData> get cards => _cards;
+  List<DisplayableCard> get cards => _cards;
 
   void init() {
     _cards.addAll(
       List.generate(
         3,
-        (idx) => CardData(
+        (idx) => DisplayableCard(
           value: idx + 1,
           bulls: 1,
           position: const Rect.fromLTWH(100, 100, 50, 80),

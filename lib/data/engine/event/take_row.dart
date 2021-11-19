@@ -17,6 +17,7 @@ class GameEventTakeRow extends GameEvent {
   dispatch(Game state) {
     final actor = state.players.firstWhere((e) => e.id == player);
     final rowObject = state.rows[row];
+    actor.bulls += rowObject.cards.map((e) => e.bulls).reduce((a, b) => a + b);
     actor.gathered.addAll(rowObject.cards);
     rowObject.cards.clear();
   }

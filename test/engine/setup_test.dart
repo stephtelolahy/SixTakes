@@ -1,6 +1,7 @@
 import 'package:sixtakes/data/engine/deck.dart';
 import 'package:sixtakes/data/engine/setup.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sixtakes/data/model/card.dart';
 import 'package:sixtakes/data/model/user.dart';
 
 void main() {
@@ -40,15 +41,14 @@ void main() {
   });
 }
 
-extension IsSorted on List<int> {
+extension IsSorted on List<PlayingCard> {
   bool isSorted() {
-    int previous = 0;
-    for (var value in this) {
-      if (value < previous) {
+    PlayingCard? previous;
+    for (var card in this) {
+      if (previous != null && card.value < previous.value) {
         return false;
-      } else {
-        previous = value;
       }
+      previous = card;
     }
     return true;
   }

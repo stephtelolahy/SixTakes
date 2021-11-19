@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../game_model.dart';
 
 class CardWidget extends StatelessWidget {
-  final CardData data;
+  final DisplayableCard data;
 
   const CardWidget({Key? key, required this.data}) : super(key: key);
 
