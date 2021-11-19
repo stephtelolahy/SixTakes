@@ -8,11 +8,15 @@ void main() {
 
   test('single winner if one player has the biggest number of bulls', () {
     // Given
-    final state = Game(select: false, rows: [], players: [
-      Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
-      Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 20),
-      Player(id: 'p3', name: '', photoURL: '', hand: [], gathered: [], bulls: 30),
-    ]);
+    final state = Game(
+      select: false,
+      rows: [],
+      players: [
+        Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
+        Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 20),
+        Player(id: 'p3', name: '', photoURL: '', hand: [], gathered: [], bulls: 30),
+      ],
+    );
 
     // When
     final effects = sut.triggered(state);
@@ -27,11 +31,15 @@ void main() {
 
   test('multiple winners if multiple players have the biggest number of bulls', () {
     // Given
-    final state = Game(select: false, rows: [], players: [
-      Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
-      Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
-      Player(id: 'p3', name: '', photoURL: '', hand: [], gathered: [], bulls: 30),
-    ]);
+    final state = Game(
+      select: false,
+      rows: [],
+      players: [
+        Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
+        Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
+        Player(id: 'p3', name: '', photoURL: '', hand: [], gathered: [], bulls: 30),
+      ],
+    );
 
     // When
     final effects = sut.triggered(state);

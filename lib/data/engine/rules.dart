@@ -19,6 +19,10 @@ class GameRules extends IGameRules {
       return [GameEventUncoverCards()];
     }
 
+    if (!state.select && state.players.every((e) => e.played == null)) {
+      return [GameEventNextTurn()];
+    }
+
     return [];
   }
 
