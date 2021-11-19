@@ -6,6 +6,7 @@ part 'uncover_cards.dart';
 part 'put_row.dart';
 part 'take_row.dart';
 part 'next_turn.dart';
+part 'game_over.dart';
 
 // state update
 abstract class GameEvent extends Equatable {

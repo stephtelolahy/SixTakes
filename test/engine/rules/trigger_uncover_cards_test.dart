@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sixtakes/data/engine/event/event.dart';
-import 'package:sixtakes/data/engine/game_rules.dart';
+import 'package:sixtakes/data/engine/rules.dart';
 import 'package:sixtakes/data/model/game.dart';
 
 void main() {

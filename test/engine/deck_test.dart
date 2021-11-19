@@ -1,4 +1,4 @@
-import 'package:sixtakes/data/engine/game_rules.dart';
+import 'package:sixtakes/data/engine/rules.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

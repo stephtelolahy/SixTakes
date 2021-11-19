@@ -1,4 +1,4 @@
-import 'package:sixtakes/data/engine/game_setup.dart';
+import 'package:sixtakes/data/engine/setup.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sixtakes/data/model/user.dart';
 

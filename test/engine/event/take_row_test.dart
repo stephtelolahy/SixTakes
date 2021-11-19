@@ -25,7 +25,7 @@ void main() {
 
     // Assert
     final actor = state.players.firstWhere((e) => e.id == 'p1');
-    expect(actor.played, equals([55]));
+    expect(actor.played, equals(55));
     expect(actor.gathered, equals([6, 9, 12, 44, 4, 11, 19, 20, 34]));
     expect(state.rows[0].cards, equals([93, 102]));
     expect(state.rows[1].cards, isEmpty);
