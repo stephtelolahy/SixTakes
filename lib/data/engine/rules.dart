@@ -23,6 +23,12 @@ class GameRules extends IGameRules {
       return [GameEventNextTurn()];
     }
 
+    if (!state.select) {
+      final minPlayedCard = state.players.map((e) => e.played!.value).reduce(min);
+      final minPlayer = state.players.firstWhere((e) => e.played!.value == minPlayedCard);
+      return _putSelectedCard(state, minPlayer, minPlayedCard);
+    }
+
     return [];
   }
 
@@ -33,5 +39,12 @@ class GameRules extends IGameRules {
 
     final minBulls = state.players.map((e) => e.bulls).reduce(min);
     return state.players.where((e) => e.bulls == minBulls).map((e) => e.id).toList();
+  }
+
+  List<GameEvent> _putSelectedCard(Game state, Player actor, int card) {
+    final nearestValue =
+        state.rows.map((e) => e.cards.last.value).where((e) => e < card).reduce(max);
+    final rowIndex = state.rows.indexWhere((e) => e.cards.last.value == nearestValue);
+    return [GameEventPutRow(player: actor.id, row: rowIndex)];
   }
 }

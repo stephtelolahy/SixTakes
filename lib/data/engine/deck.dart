@@ -5,11 +5,9 @@ abstract class IGameDeck {
 }
 
 class GameDeck extends IGameDeck {
-  static const int cardsCount = 104;
-
   @override
   List<PlayingCard> createDeck() {
-    return List.generate(cardsCount, (idx) {
+    return List.generate(104, (idx) {
       final value = idx + 1;
       final bulls = _bullsForCard(value);
       return PlayingCard(value: value, bulls: bulls);
