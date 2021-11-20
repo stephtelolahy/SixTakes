@@ -7,14 +7,13 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const String _title = 'Flutter Card Game';
+  static const String _title = '6takes!';
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: _title,
-      theme: ThemeData(brightness: Brightness.dark),
-      home: const GameView(),
+      home: GameView(),
     );
   }
 }
