@@ -26,15 +26,23 @@ class GameView extends StatelessWidget {
 class GameBoard extends StatelessWidget {
   GameBoard({Key? key}) : super(key: key);
 
+  static const int PLAYERS_COUNT = 4;
+  static const int ROWS_COUNT = 4;
+  static const int CARDS_PER_ROW = 6;
   static const double CARD_WIDTH = 40;
   static const double CARD_HEIGHT = 50;
 
-  final Map<String, GlobalKey> _globalKeys = {
-    'player0': GlobalKey(),
-    'player1': GlobalKey(),
-    'player2': GlobalKey(),
-    'player3': GlobalKey()
-  };
+  final Map<String, GlobalKey> _globalKeys = _generateGlobalKeys();
+
+  static Map<String, GlobalKey> _generateGlobalKeys() {
+    List<String> keys = List.generate(PLAYERS_COUNT, (idx) => 'player$idx');
+    for (var i = 0; i < ROWS_COUNT; i++) {
+      for (var j = 0; j < CARDS_PER_ROW; j++) {
+        keys.add('row$i$j');
+      }
+    }
+    return {for (var e in keys) e: GlobalKey()};
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +53,7 @@ class GameBoard extends StatelessWidget {
                 child: Column(
                   children: [
                     _buildOthers(context),
-                    //_buildPlayground(context, discard: _gameController.discard),
+                    _buildGameRows(context)
                     //_buildYou(context, _gameController.you, state),
                     //_buildHand(context, _gameController.you.hand),
                   ],
@@ -53,7 +61,11 @@ class GameBoard extends StatelessWidget {
               )
             ] +
             model.cards
-                .map((e) => CardWidget(data: e, renderBox: _globalKeys[e.renderKey]!.renderBox()))
+                .map((e) => CardWidget(
+                      key: Key('card${e.value}'),
+                      data: e,
+                      renderBox: _globalKeys[e.renderKey]!.renderBox(),
+                    ))
                 .toList(),
       );
     });
@@ -64,13 +76,37 @@ class GameBoard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(
-          4,
+          PLAYERS_COUNT,
           (idx) => CardPlaceholder(
                 key: _globalKeys['player$idx'],
                 name: 'player$idx',
                 width: CARD_WIDTH,
                 height: CARD_HEIGHT,
               )).toList(),
+    );
+  }
+
+  Widget _buildGameRows(BuildContext context) {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List.generate(ROWS_COUNT, (idx) => _buildGameRow(context, idx)).toList(),
+      ),
+    );
+  }
+
+  Widget _buildGameRow(BuildContext context, int rowIndex) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: List.generate(
+        CARDS_PER_ROW,
+        (colIndex) => CardPlaceholder(
+          key: _globalKeys['row$rowIndex$colIndex'],
+          name: 'row$rowIndex$colIndex',
+          width: CARD_WIDTH,
+          height: CARD_HEIGHT,
+        ),
+      ).toList(),
     );
   }
 }

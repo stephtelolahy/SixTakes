@@ -15,30 +15,52 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
-        key: Key(data.value.toString()),
         width: renderBox.width,
         height: renderBox.height,
         top: renderBox.top,
         left: renderBox.left,
         duration: const Duration(milliseconds: 500),
         curve: Curves.fastOutSlowIn,
-        child: Opacity(
+        child: AnimatedOpacity(
+          duration: const Duration(milliseconds: 500),
           opacity: data.hidden ? 0 : 1,
           child: Card(
             elevation: 1.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(2.0),
             ),
-            color: Colors.blue,
+            color: data.covered ? Colors.white : _backgroundColor(data.bulls),
             child: Center(
               child: Column(
                 children: [
-                  Text('${data.value}'),
+                  Text(data.covered ? '?' : '${data.value}'),
                   const Icon(Icons.smart_toy),
                 ],
               ),
             ),
           ),
         ));
+  }
+
+  static Color _backgroundColor(int bulls) {
+    switch (bulls) {
+      case 1:
+        return Colors.white;
+
+      case 2:
+        return Colors.lightBlue;
+
+      case 3:
+        return Colors.orange;
+
+      case 5:
+        return Colors.red;
+
+      case 7:
+        return Colors.purple;
+
+      default:
+        throw Exception('Invalid bulls');
+    }
   }
 }
