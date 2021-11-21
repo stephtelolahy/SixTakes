@@ -37,8 +37,8 @@ class GameRules extends IGameRules {
       return null;
     }
 
-    final minBulls = state.players.map((e) => e._bulls).reduce(min);
-    return state.players.where((e) => e._bulls == minBulls).map((e) => e.id).toList();
+    final minBulls = state.players.map((e) => e.bulls).reduce(min);
+    return state.players.where((e) => e.bulls == minBulls).map((e) => e.id).toList();
   }
 
   List<GameEvent> _putSelectedCard(Game state, Player actor, int card) {
@@ -74,5 +74,5 @@ extension RowBulls on GameRow {
 }
 
 extension PlayerBulls on Player {
-  int get _bulls => gathered.map((e) => e.bulls).reduce((a, b) => a + b);
+  int get bulls => gathered.isNotEmpty ? gathered.map((e) => e.bulls).reduce((a, b) => a + b) : 0;
 }

@@ -1,3 +1,4 @@
+// ignore: implementation_imports
 import 'package:collection/src/iterable_extensions.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sixtakes/data/engine/deck.dart';
@@ -25,23 +26,21 @@ class DisplayableCard {
 }
 
 class GameModel extends ChangeNotifier {
+  bool _loaded = false;
   List<DisplayableCard> _cards = [];
-
-  List<DisplayableCard> get cards => _cards;
-
+  List<Player> _others = [];
+  late Player _you;
   late IGameEngine _engine;
+  final _controlled = 'p0';
 
-  void update() {
-    if (_cards.isEmpty) {
-      _initialize();
-    } else {
-      _randomMove();
-    }
-  }
+  bool get loaded => _loaded;
+  List<DisplayableCard> get cards => _cards;
+  List<Player> get others => _others;
+  Player get you => _you;
 
-  void _initialize() {
+  void initialize() {
     final users = List.generate(
-      4,
+      6,
       (idx) => User(
         id: 'p$idx',
         name: 'user$idx',
@@ -51,25 +50,28 @@ class GameModel extends ChangeNotifier {
     );
     final deck = GameDeck().createDeck();
     final state = GameSetup().createGame(users, deck);
-    _engine = GameEngine(initialState: state, rules: GameRules(), eventDurationMillis: 600);
+    _engine = GameEngine(initialState: state, rules: GameRules(), eventDurationMillis: 1000);
     _engine.stateSubject.listen((state) {
-      _cards = _mapState(state);
+      _cards = _buildDisplayableCards(state);
+      _you = state.players.firstWhere((e) => e.id == _controlled);
+      _others = state.players.where((e) => e.id != _controlled).toList();
+      _loaded = true;
       notifyListeners();
     });
   }
 
-  static List<DisplayableCard> _mapState(Game state) {
+  static List<DisplayableCard> _buildDisplayableCards(Game state) {
     List<DisplayableCard> result = [];
-    for (var playerIndex = 0; playerIndex < state.players.length; playerIndex++) {
-      final player = state.players[playerIndex];
+    for (var player in state.players) {
       final card = player.played;
       if (card != null) {
         result.add(
           DisplayableCard(
-              value: card.value,
-              bulls: card.bulls,
-              covered: state.select,
-              renderKey: 'player$playerIndex'),
+            value: card.value,
+            bulls: card.bulls,
+            covered: state.select,
+            renderKey: player.id,
+          ),
         );
       }
 
@@ -79,7 +81,7 @@ class GameModel extends ChangeNotifier {
             value: card.value,
             bulls: card.bulls,
             hidden: true,
-            renderKey: 'player$playerIndex',
+            renderKey: player.id,
           ),
         );
       }
@@ -102,13 +104,28 @@ class GameModel extends ChangeNotifier {
     return result;
   }
 
-  void _randomMove() {
+  void play(int card) async {
     final state = _engine.stateSubject.value;
     if (state.select) {
-      final actor = state.players.firstWhereOrNull((e) => e.played == null);
+      final actor = state.players.firstWhereOrNull((e) => e.played == null && e.id == _controlled);
       if (actor != null) {
-        _engine.play(actor.id, actor.hand.randomElement().value);
+        await _engine.play(actor.id, card);
+        _aiMoves();
       }
     }
+  }
+
+  void _aiMoves() async {
+    Game state;
+    do {
+      state = _engine.stateSubject.value;
+      final actor = state.players.firstWhereOrNull((e) => e.played == null && e.id != _controlled);
+      if (actor != null) {
+        final card = actor.hand.randomElement().value;
+        await _engine.play(actor.id, card);
+      } else {
+        break;
+      }
+    } while (state.select);
   }
 }

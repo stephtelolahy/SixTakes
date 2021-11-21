@@ -9,7 +9,7 @@ import 'package:sixtakes/data/model/game.dart';
 
 abstract class IGameEngine {
   BehaviorSubject<Game> get stateSubject;
-  play(String player, int card);
+  Future<void> play(String player, int card);
 }
 
 class GameEngine extends IGameEngine {
@@ -27,11 +27,11 @@ class GameEngine extends IGameEngine {
         _eventDurationMillis = eventDurationMillis;
 
   @override
-  play(String player, int card) {
+  Future<void> play(String player, int card) async {
     debugPrint('\nplay $player $card');
 
     _queue.add(GameEventSelectCard(player: player, card: card));
-    _update();
+    await _update();
   }
 
   Future<void> _update() async {
@@ -51,6 +51,7 @@ class GameEngine extends IGameEngine {
 
     final event = _queue.removeFirst();
     await _dispatch(event, state);
+    await Future.delayed(Duration(milliseconds: _eventDurationMillis));
     await _update();
   }
 
@@ -60,10 +61,8 @@ class GameEngine extends IGameEngine {
   }
 
   Future<void> _dispatch(GameEvent event, Game state) async {
-    await Future.delayed(Duration(milliseconds: _eventDurationMillis));
     event.dispatch(state);
     stateSubject.add(state);
-
     debugPrint('\n$event Pending=${_queue.length}');
     debugPrint('players: ${state.players.map((e) => '${e.id}:${e.played?.value}').join('; ')}');
     debugPrint(

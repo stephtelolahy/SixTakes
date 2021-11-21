@@ -23,6 +23,7 @@ class CardWidget extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 500),
+          curve: Curves.easeIn,
           opacity: data.hidden ? 0 : 1,
           child: Card(
             elevation: 1.0,
@@ -33,8 +34,15 @@ class CardWidget extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  Text(data.covered ? '?' : '${data.value}'),
-                  const Icon(Icons.smart_toy),
+                  const Icon(Icons.smart_toy_outlined),
+                  Text(data.covered ? '?' : '${data.value}',
+                      style: TextStyle(
+                        fontSize: 20,
+                        foreground: Paint()
+                          ..style = PaintingStyle.stroke
+                          ..strokeWidth = 1
+                          ..color = Colors.black,
+                      )),
                 ],
               ),
             ),
