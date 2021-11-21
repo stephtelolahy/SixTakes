@@ -20,13 +20,13 @@ void main() {
       ]),
     ], players: [
       Player(
-          id: 'p1',
-          name: '',
-          photoURL: '',
-          hand: [],
-          played: const PlayingCard(value: 55, bulls: 7),
-          gathered: [],
-          bulls: 0)
+        id: 'p1',
+        name: '',
+        photoURL: '',
+        hand: [],
+        played: const PlayingCard(value: 55, bulls: 7),
+        gathered: [],
+      )
     ]);
     final event = GameEventTakeRow(player: 'p1', row: 1);
 
@@ -37,7 +37,6 @@ void main() {
     final actor = state.players.firstWhere((e) => e.id == 'p1');
     expect(actor.played?.value, equals(55));
     expect(actor.gathered.map((e) => e.value), equals([5, 11, 19, 20, 34]));
-    expect(actor.bulls, equals(8));
     expect(state.rows[1].cards, isEmpty);
   });
 }

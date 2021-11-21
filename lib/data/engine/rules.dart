@@ -37,24 +37,24 @@ class GameRules extends IGameRules {
       return null;
     }
 
-    final minBulls = state.players.map((e) => e.bulls).reduce(min);
-    return state.players.where((e) => e.bulls == minBulls).map((e) => e.id).toList();
+    final minBulls = state.players.map((e) => e._bulls).reduce(min);
+    return state.players.where((e) => e._bulls == minBulls).map((e) => e.id).toList();
   }
 
   List<GameEvent> _putSelectedCard(Game state, Player actor, int card) {
-    final possibleRows = state.rows.where((e) => e.lastValue < card);
+    final possibleRows = state.rows.where((e) => e._lastValue < card);
 
     if (possibleRows.isEmpty) {
-      final minRowBulls = state.rows.map((e) => e.bulls).reduce(min);
-      final minRowIndex = state.rows.indexWhere((e) => e.bulls == minRowBulls);
+      final minRowBulls = state.rows.map((e) => e._bulls).reduce(min);
+      final minRowIndex = state.rows.indexWhere((e) => e._bulls == minRowBulls);
       return [
         GameEventTakeRow(player: actor.id, row: minRowIndex),
         GameEventPutRow(player: actor.id, row: minRowIndex),
       ];
     }
 
-    final nearestValue = possibleRows.map((e) => e.lastValue).reduce(max);
-    final rowIndex = state.rows.indexWhere((e) => e.lastValue == nearestValue);
+    final nearestValue = possibleRows.map((e) => e._lastValue).reduce(max);
+    final rowIndex = state.rows.indexWhere((e) => e._lastValue == nearestValue);
 
     if (state.rows[rowIndex].cards.length >= 5) {
       return [
@@ -67,8 +67,12 @@ class GameRules extends IGameRules {
   }
 }
 
-extension Bulls on GameRow {
-  int get bulls => cards.map((e) => e.bulls).reduce((a, b) => a + b);
+extension RowBulls on GameRow {
+  int get _bulls => cards.map((e) => e.bulls).reduce((a, b) => a + b);
 
-  int get lastValue => cards.last.value;
+  int get _lastValue => cards.last.value;
+}
+
+extension PlayerBulls on Player {
+  int get _bulls => gathered.map((e) => e.bulls).reduce((a, b) => a + b);
 }

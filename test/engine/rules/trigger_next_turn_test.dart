@@ -19,7 +19,6 @@ void main() {
             photoURL: '',
             hand: [const PlayingCard(value: 44, bulls: 1)],
             gathered: [],
-            bulls: 0,
             played: null),
         Player(
             id: 'p2',
@@ -27,7 +26,6 @@ void main() {
             photoURL: '',
             hand: [const PlayingCard(value: 67, bulls: 1)],
             gathered: [],
-            bulls: 0,
             played: null)
       ],
     );

@@ -20,7 +20,6 @@ class Player {
   final String photoURL;
   final List<PlayingCard> hand;
   final List<PlayingCard> gathered;
-  int bulls;
   PlayingCard? played;
 
   Player({
@@ -29,7 +28,6 @@ class Player {
     required this.photoURL,
     required this.hand,
     required this.gathered,
-    required this.bulls,
     this.played,
   });
 }

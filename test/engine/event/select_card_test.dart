@@ -16,7 +16,6 @@ void main() {
           const PlayingCard(value: 30, bulls: 3),
         ],
         gathered: [],
-        bulls: 0,
       ),
       Player(
           id: 'p2',
@@ -24,7 +23,6 @@ void main() {
           photoURL: '',
           hand: [],
           gathered: [],
-          bulls: 0,
           played: const PlayingCard(value: 11, bulls: 1))
     ]);
     final event = GameEventSelectCard(player: 'p1', card: 2);

@@ -23,7 +23,6 @@ void main() {
         hand: [],
         played: const PlayingCard(value: 55, bulls: 7),
         gathered: [],
-        bulls: 0,
       )
     ]);
     final event = GameEventPutRow(player: 'p1', row: 0);

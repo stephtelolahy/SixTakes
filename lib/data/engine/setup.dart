@@ -19,10 +19,9 @@ class GameSetup extends IGameSetup {
         photoURL: e.photoURL,
         hand: hand,
         gathered: [],
-        bulls: 0,
       );
     }).toList();
-    final board = List.generate(4, (idx) => GameRow(cards: [deck.removeAt(0)]));
-    return Game(select: true, rows: board, players: players);
+    final rows = List.generate(4, (idx) => GameRow(cards: [deck.removeAt(0)]));
+    return Game(select: true, rows: rows, players: players);
   }
 }

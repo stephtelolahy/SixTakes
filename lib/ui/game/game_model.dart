@@ -4,7 +4,6 @@ import 'package:sixtakes/data/engine/deck.dart';
 import 'package:sixtakes/data/engine/engine.dart';
 import 'package:sixtakes/data/engine/rules.dart';
 import 'package:sixtakes/data/engine/setup.dart';
-import 'package:sixtakes/data/model/card.dart';
 import 'package:sixtakes/data/model/game.dart';
 import 'package:sixtakes/data/model/user.dart';
 import 'package:sixtakes/misc/list_extensions.dart';

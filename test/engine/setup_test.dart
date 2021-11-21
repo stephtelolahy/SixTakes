@@ -26,7 +26,7 @@ void main() {
     expect(state.players[1].photoURL, equals('photo2'));
     for (var player in state.players) {
       expect(player.played, isNull);
-      expect(player.bulls, equals(0));
+      expect(player.gathered, isEmpty);
       expect(player.hand.length, equals(10), reason: 'each player should have 10 cards');
       expect(player.hand.isSorted(), isTrue, reason: 'hand must be sorted');
     }

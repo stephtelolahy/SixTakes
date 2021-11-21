@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sixtakes/data/engine/event/event.dart';
 import 'package:sixtakes/data/engine/rules.dart';
+import 'package:sixtakes/data/model/card.dart';
 import 'package:sixtakes/data/model/game.dart';
 
 void main() {
@@ -12,9 +13,24 @@ void main() {
       select: false,
       rows: [],
       players: [
-        Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
-        Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 20),
-        Player(id: 'p3', name: '', photoURL: '', hand: [], gathered: [], bulls: 30),
+        Player(
+            id: 'p1',
+            name: '',
+            photoURL: '',
+            hand: [],
+            gathered: [const PlayingCard(value: 1, bulls: 1)]),
+        Player(
+            id: 'p2',
+            name: '',
+            photoURL: '',
+            hand: [],
+            gathered: [const PlayingCard(value: 10, bulls: 2)]),
+        Player(
+            id: 'p3',
+            name: '',
+            photoURL: '',
+            hand: [],
+            gathered: [const PlayingCard(value: 55, bulls: 7)]),
       ],
     );
 
@@ -35,9 +51,24 @@ void main() {
       select: false,
       rows: [],
       players: [
-        Player(id: 'p1', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
-        Player(id: 'p2', name: '', photoURL: '', hand: [], gathered: [], bulls: 10),
-        Player(id: 'p3', name: '', photoURL: '', hand: [], gathered: [], bulls: 30),
+        Player(
+            id: 'p1',
+            name: '',
+            photoURL: '',
+            hand: [],
+            gathered: [const PlayingCard(value: 3, bulls: 1)]),
+        Player(
+            id: 'p2',
+            name: '',
+            photoURL: '',
+            hand: [],
+            gathered: [const PlayingCard(value: 9, bulls: 1)]),
+        Player(
+            id: 'p3',
+            name: '',
+            photoURL: '',
+            hand: [],
+            gathered: [const PlayingCard(value: 15, bulls: 3)]),
       ],
     );
 
