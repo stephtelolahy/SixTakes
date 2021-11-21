@@ -7,7 +7,7 @@ import 'package:sixtakes/data/model/game.dart';
 void main() {
   final sut = GameRules();
 
-  test('gather row cards when no corresponding row', () {
+  test('gather row cards if no matching row', () {
     // Given
     final state = Game(
       select: false,
@@ -88,8 +88,8 @@ void main() {
     expect(
         effects,
         equals([
-          GameEventTakeRow(player: 'p2', row: 3),
           GameEventPutRow(player: 'p2', row: 3),
+          GameEventTakeRow(player: 'p2', row: 3, excluding: 11),
         ]));
   });
 }

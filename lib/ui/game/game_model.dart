@@ -85,19 +85,17 @@ class GameModel extends ChangeNotifier {
       }
     }
 
-    for (var rowIndex = 0; rowIndex < 4; rowIndex++) {
+    for (var rowIndex = 0; rowIndex < state.rows.length; rowIndex++) {
       final rowCards = state.rows[rowIndex].cards;
-      for (var colIndex = 0; colIndex < 5; colIndex++) {
-        if (colIndex < rowCards.length) {
-          final card = rowCards[colIndex];
-          result.add(
-            DisplayableCard(
-              value: card.value,
-              bulls: card.bulls,
-              renderKey: 'row$rowIndex$colIndex',
-            ),
-          );
-        }
+      for (var colIndex = 0; colIndex < rowCards.length; colIndex++) {
+        final card = rowCards[colIndex];
+        result.add(
+          DisplayableCard(
+            value: card.value,
+            bulls: card.bulls,
+            renderKey: 'row$rowIndex$colIndex',
+          ),
+        );
       }
     }
 

@@ -58,8 +58,8 @@ class GameRules extends IGameRules {
 
     if (state.rows[rowIndex].cards.length >= 5) {
       return [
-        GameEventTakeRow(player: actor.id, row: rowIndex),
         GameEventPutRow(player: actor.id, row: rowIndex),
+        GameEventTakeRow(player: actor.id, row: rowIndex, excluding: card),
       ];
     }
 
