@@ -8,39 +8,24 @@ import 'package:sixtakes/data/engine/setup.dart';
 import 'package:sixtakes/data/model/game.dart';
 import 'package:sixtakes/data/model/user.dart';
 import 'package:sixtakes/misc/list_extensions.dart';
-
-class DisplayableCard {
-  final int value;
-  final int bulls;
-  bool covered;
-  bool hidden;
-  String renderKey;
-
-  DisplayableCard({
-    required this.value,
-    required this.bulls,
-    this.covered = false,
-    this.hidden = false,
-    required this.renderKey,
-  });
-}
+import 'package:sixtakes/ui/game/widgets/animated_card_data.dart';
 
 class GameModel extends ChangeNotifier {
   bool _loaded = false;
-  List<DisplayableCard> _cards = [];
+  List<AnimatedCardData> _cards = [];
   List<Player> _others = [];
   late Player _you;
   late IGameEngine _engine;
   final _controlled = 'p0';
 
   bool get loaded => _loaded;
-  List<DisplayableCard> get cards => _cards;
+  List<AnimatedCardData> get cards => _cards;
   List<Player> get others => _others;
   Player get you => _you;
 
   void initialize() {
     final users = List.generate(
-      6,
+      7,
       (idx) => User(
         id: 'p$idx',
         name: 'user$idx',
@@ -60,13 +45,13 @@ class GameModel extends ChangeNotifier {
     });
   }
 
-  static List<DisplayableCard> _buildDisplayableCards(Game state) {
-    List<DisplayableCard> result = [];
+  static List<AnimatedCardData> _buildDisplayableCards(Game state) {
+    List<AnimatedCardData> result = [];
     for (var player in state.players) {
       final card = player.played;
       if (card != null) {
         result.add(
-          DisplayableCard(
+          AnimatedCardData(
             value: card.value,
             bulls: card.bulls,
             covered: state.select,
@@ -77,7 +62,7 @@ class GameModel extends ChangeNotifier {
 
       for (var card in player.gathered) {
         result.add(
-          DisplayableCard(
+          AnimatedCardData(
             value: card.value,
             bulls: card.bulls,
             hidden: true,
@@ -92,7 +77,7 @@ class GameModel extends ChangeNotifier {
       for (var colIndex = 0; colIndex < rowCards.length; colIndex++) {
         final card = rowCards[colIndex];
         result.add(
-          DisplayableCard(
+          AnimatedCardData(
             value: card.value,
             bulls: card.bulls,
             renderKey: 'row$rowIndex$colIndex',
@@ -119,6 +104,10 @@ class GameModel extends ChangeNotifier {
     Game state;
     do {
       state = _engine.stateSubject.value;
+      if (state.winner != null) {
+        return;
+      }
+
       final actor = state.players.firstWhereOrNull((e) => e.played == null && e.id != _controlled);
       if (actor != null) {
         final card = actor.hand.randomElement().value;

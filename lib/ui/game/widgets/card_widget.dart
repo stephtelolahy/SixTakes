@@ -1,53 +1,50 @@
 import 'package:flutter/material.dart';
-
-import '../game_model.dart';
+import 'package:flutter/widgets.dart';
 
 class CardWidget extends StatelessWidget {
-  final DisplayableCard data;
-  final Rect renderBox;
+  final int value;
+  final int bulls;
+  final double width;
+  final double height;
+  final bool covered;
 
   const CardWidget({
     Key? key,
-    required this.data,
-    required this.renderBox,
+    required this.value,
+    required this.bulls,
+    required this.width,
+    required this.height,
+    this.covered = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPositioned(
-        width: renderBox.width,
-        height: renderBox.height,
-        top: renderBox.top,
-        left: renderBox.left,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.fastOutSlowIn,
-        child: AnimatedOpacity(
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeIn,
-          opacity: data.hidden ? 0 : 1,
-          child: Card(
-            elevation: 1.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(2.0),
-            ),
-            color: data.covered ? Colors.white : _backgroundColor(data.bulls),
-            child: Center(
-              child: Column(
-                children: [
-                  const Icon(Icons.smart_toy_outlined),
-                  Text(data.covered ? '?' : '${data.value}',
-                      style: TextStyle(
-                        fontSize: 20,
-                        foreground: Paint()
-                          ..style = PaintingStyle.stroke
-                          ..strokeWidth = 1
-                          ..color = Colors.black,
-                      )),
-                ],
-              ),
-            ),
+    return SizedBox(
+      width: width,
+      height: height,
+      child: Card(
+        elevation: 1.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(2.0),
+        ),
+        color: covered ? Colors.white : _backgroundColor(bulls),
+        child: Center(
+          child: Column(
+            children: [
+              const Icon(Icons.smart_toy_outlined),
+              Text(covered ? '?' : '$value',
+                  style: TextStyle(
+                    fontSize: 20,
+                    foreground: Paint()
+                      ..style = PaintingStyle.stroke
+                      ..strokeWidth = 1
+                      ..color = Colors.black,
+                  )),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   static Color _backgroundColor(int bulls) {
