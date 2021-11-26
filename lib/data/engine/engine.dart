@@ -14,23 +14,23 @@ abstract class IGameEngine {
 
 class GameEngine extends IGameEngine {
   final GameRules _rules;
-  final Queue<GameEvent> _queue;
-  final int _eventDurationMillis;
+  final Queue<GameEvent> _commands;
+  final int _delayMillis;
 
   @override
   final BehaviorSubject<Game> stateSubject;
 
-  GameEngine({required Game initialState, required GameRules rules, int eventDurationMillis = 0})
+  GameEngine({required Game initialState, required GameRules rules, int delayMillis = 0})
       : stateSubject = BehaviorSubject<Game>.seeded(initialState),
         _rules = rules,
-        _queue = Queue(),
-        _eventDurationMillis = eventDurationMillis;
+        _commands = Queue(),
+        _delayMillis = delayMillis;
 
   @override
   Future<void> play(String player, int card) async {
     debugPrint('\nplay $player $card');
 
-    _queue.add(GameEventSelectCard(player: player, card: card));
+    _commands.add(GameEventSelectCard(player: player, card: card));
     await _update();
   }
 
@@ -41,29 +41,30 @@ class GameEngine extends IGameEngine {
       return;
     }
 
-    if (_queue.isEmpty) {
+    if (_commands.isEmpty) {
       _queueTriggered(state);
     }
 
-    if (_queue.isEmpty) {
+    if (_commands.isEmpty) {
       return;
     }
 
-    final event = _queue.removeFirst();
+    final event = _commands.removeFirst();
     await _dispatch(event, state);
-    await Future.delayed(Duration(milliseconds: _eventDurationMillis));
+    await Future.delayed(Duration(milliseconds: _delayMillis));
+
     await _update();
   }
 
   void _queueTriggered(Game state) {
     final events = _rules.triggered(state);
-    _queue.addAll(events);
+    _commands.addAll(events);
   }
 
   Future<void> _dispatch(GameEvent event, Game state) async {
     event.dispatch(state);
     stateSubject.add(state);
-    debugPrint('\n$event Pending=${_queue.length}');
+    debugPrint('\n$event Pending=${_commands.length}');
     debugPrint('players: ${state.players.map((e) => '${e.id}:${e.played?.value}').join('; ')}');
     debugPrint(
         'rows: ${state.rows.map((e) => '[${e.cards.map((e) => e.value).join(',')}]').join('; ')}');

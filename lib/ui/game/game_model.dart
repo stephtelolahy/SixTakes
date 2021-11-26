@@ -8,7 +8,7 @@ import 'package:sixtakes/data/engine/setup.dart';
 import 'package:sixtakes/data/model/game.dart';
 import 'package:sixtakes/data/model/user.dart';
 import 'package:sixtakes/misc/list_extensions.dart';
-import 'package:sixtakes/ui/game/widgets/animated_card_data.dart';
+import 'package:sixtakes/ui/game/widgets/animated_card_widget.dart';
 
 class GameModel extends ChangeNotifier {
   bool _loaded = false;
@@ -35,17 +35,18 @@ class GameModel extends ChangeNotifier {
     );
     final deck = GameDeck().createDeck();
     final state = GameSetup().createGame(users, deck);
-    _engine = GameEngine(initialState: state, rules: GameRules(), eventDurationMillis: 1000);
+    _engine = GameEngine(initialState: state, rules: GameRules(), delayMillis: 1000);
     _engine.stateSubject.listen((state) {
-      _cards = _buildDisplayableCards(state);
+      _cards = _buildCards(state);
       _you = state.players.firstWhere((e) => e.id == _controlled);
       _others = state.players.where((e) => e.id != _controlled).toList();
       _loaded = true;
+      _playAI();
       notifyListeners();
     });
   }
 
-  static List<AnimatedCardData> _buildDisplayableCards(Game state) {
+  static List<AnimatedCardData> _buildCards(Game state) {
     List<AnimatedCardData> result = [];
     for (var player in state.players) {
       final card = player.played;
@@ -89,32 +90,24 @@ class GameModel extends ChangeNotifier {
     return result;
   }
 
-  void play(int card) async {
+  void play(int card) {
     final state = _engine.stateSubject.value;
     if (state.select) {
       final actor = state.players.firstWhereOrNull((e) => e.played == null && e.id == _controlled);
       if (actor != null) {
-        await _engine.play(actor.id, card);
-        _aiMoves();
+        _engine.play(actor.id, card);
       }
     }
   }
 
-  void _aiMoves() async {
-    Game state;
-    do {
-      state = _engine.stateSubject.value;
-      if (state.winner != null) {
-        return;
-      }
-
+  void _playAI() {
+    final state = _engine.stateSubject.value;
+    if (state.select) {
       final actor = state.players.firstWhereOrNull((e) => e.played == null && e.id != _controlled);
       if (actor != null) {
         final card = actor.hand.randomElement().value;
-        await _engine.play(actor.id, card);
-      } else {
-        break;
+        _engine.play(actor.id, card);
       }
-    } while (state.select);
+    }
   }
 }

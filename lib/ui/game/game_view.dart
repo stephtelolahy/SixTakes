@@ -18,8 +18,6 @@ class GameView extends StatelessWidget {
 
   static const int ROWS_COUNT = 4;
   static const int CARDS_PER_ROW = 6;
-
-  // TODO: compute card size from device screen size
   static const double CARD_WIDTH = 60;
   static const double CARD_HEIGHT = 75;
 

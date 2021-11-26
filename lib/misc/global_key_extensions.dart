@@ -4,7 +4,7 @@ extension Positionning on GlobalKey {
   Rect renderBox() {
     final context = currentContext;
     if (context == null) {
-      throw Exception("Missing GlobalKey context");
+      return const Rect.fromLTRB(0, 0, 0, 0);
     }
     final box = context.findRenderObject() as RenderBox;
     final offset = box.localToGlobal(Offset.zero);

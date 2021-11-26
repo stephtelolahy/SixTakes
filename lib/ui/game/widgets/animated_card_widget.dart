@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:sixtakes/ui/game/widgets/card_widget.dart';
-import 'animated_card_data.dart';
+
+class AnimatedCardData {
+  final int value;
+  final int bulls;
+  final bool covered;
+  final bool hidden;
+  final String renderKey;
+
+  const AnimatedCardData({
+    required this.value,
+    required this.bulls,
+    this.covered = false,
+    this.hidden = false,
+    required this.renderKey,
+  });
+}
 
 class AnimatedCardWidget extends StatelessWidget {
   final AnimatedCardData data;
